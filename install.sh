@@ -12,16 +12,16 @@ set +a
 
 
 if [ ! -z ${_BUILD_ARG_GOOGLE_CLOUD_SDK} ]; then
-    echo "Downloading and extracting google-cloud-sdk package..."
+    echo "Downloading and extracting google-cloud-sdk@${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}..."
 
     curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}.tar.gz \
         | tar xz
 
-    echo "Installing google-cloud-sdk..."
+    echo "Installing google-cloud-sdk@${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}..."
     
     ./google-cloud-sdk/install.sh --quiet
 
-    echo "Installed google-cloud-sdk"
+    echo "Installed google-cloud-sdk@${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}"
 fi
 
 

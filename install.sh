@@ -14,8 +14,9 @@ set +a
 if [ ! -z ${_BUILD_ARG_GOOGLE_CLOUD_SDK} ]; then
     echo "Downloading and extracting google-cloud-sdk@${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}..."
 
-    curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}.tar.gz \
-        | tar xz -o /usr/local/share/google-cloud-sdk
+    curl -o google-cloud-sdk.tar.gz "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}.tar.gz"
+    tar -xz ./google-cloud-sdk.tar.gz
+    mv ./google-cloud-sdk /usr/local/share/google-cloud-sdk
 
     echo "Installing google-cloud-sdk@${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}..."
     

@@ -15,11 +15,11 @@ if [ ! -z ${_BUILD_ARG_GOOGLE_CLOUD_SDK} ]; then
     echo "Downloading and extracting google-cloud-sdk@${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}..."
 
     curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}.tar.gz \
-        | tar xz
+        | tar xz -o /usr/local/share/google-cloud-sdk
 
     echo "Installing google-cloud-sdk@${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}..."
     
-    ./google-cloud-sdk/install.sh --quiet
+    /usr/local/share/google-cloud-sdk/install.sh --quiet
 
     echo "Installed google-cloud-sdk@${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}"
 fi
@@ -28,7 +28,7 @@ fi
 if [ ! -z ${_BUILD_ARG_GOOGLE_CLOUD_SQL_AUTH_PROXY} ]; then
     echo "Downloading cloud_sql_proxy package..."
 
-    curl https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 cloud_sql_proxy
+    curl https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -o cloud_sql_proxy
     chmod +x ./cloud_sql_proxy
     
     echo "Downloaded cloud_sql_proxy package"

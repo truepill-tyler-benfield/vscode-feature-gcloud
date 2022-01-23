@@ -11,55 +11,25 @@ set -a
 set +a
 
 
-if [ ! -z ${_BUILD_ARG_HELLOWORLD} ]; then
-    echo "Activating feature 'helloworld'"
+if [ ! -z ${_BUILD_ARG_GOOGLE_CLOUD_SDK} ]; then
+    echo "Downloading and extracting google-cloud-sdk package..."
 
-    # Build args are exposed to this entire feature set following the pattern:  _BUILD_ARG_<FEATURE ID>_<OPTION NAME>
-    GREETING=${_BUILD_ARG_HELLOWORLD_GREETING:-undefined}
+    curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}.tar.gz \
+        | tar xz
 
-    tee /usr/hello.sh > /dev/null \
-    << EOF
-    #!/bin/bash
-    RED='\033[0;91m'
-    NC='\033[0m' # No Color
-    echo -e "\${RED}${GREETING}, \$(whoami)!"
-    echo -e "\${NC}"
-EOF
+    echo "Installing google-cloud-sdk..."
+    
+    ./google-cloud-sdk/install.sh --quiet
 
-    chmod +x /usr/hello.sh
-    sudo cat '/usr/hello.sh' > /usr/local/bin/hello
-    sudo chmod +x /usr/local/bin/hello
+    echo "Installed google-cloud-sdk"
 fi
 
 
-if [ ! -z ${_BUILD_ARG_COLOR} ]; then
-    echo "Activating feature 'color'"
+if [ ! -z ${_BUILD_ARG_GOOGLE_CLOUD_SQL_AUTH_PROXY} ]; then
+    echo "Downloading cloud_sql_proxy package..."
 
-    # Build args are exposed to this entire feature set following the pattern:  _BUILD_ARG_<FEATURE ID>_<OPTION NAME>
-
-    if [ "${_BUILD_ARG_COLOR_FAVORITE}" == "red" ]; then
-        FAVORITE='\\033[0\;91m'
-    fi
-
-    if [ "${_BUILD_ARG_COLOR_FAVORITE}" == "green" ]; then
-        FAVORITE='\\033[0\;32m'
-    fi
-
-    if [ "${_BUILD_ARG_COLOR_FAVORITE}" == "gold" ]; then
-        FAVORITE='\\033[0\;33m'
-    fi
-
-    tee /usr/color.sh > /dev/null \
-    << EOF
-    #!/bin/bash
-    NC='\033[0m' # No Color
-
-    FAVORITE=${FAVORITE}
-    echo -e "\${FAVORITE} This is my favorite color! \${NC}"
-EOF
-
-    chmod +x /usr/color.sh
-    sudo cat '/usr/color.sh' > /usr/local/bin/color
-    sudo chmod +x /usr/local/bin/color
-
+    curl https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 cloud_sql_proxy
+    chmod +x ./cloud_sql_proxy
+    
+    echo "Downloaded cloud_sql_proxy package"
 fi

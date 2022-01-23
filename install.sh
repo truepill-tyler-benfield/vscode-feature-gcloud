@@ -12,25 +12,31 @@ set +a
 
 
 if [ ! -z ${_BUILD_ARG_GOOGLE_CLOUD_SDK} ]; then
-    echo "Downloading and extracting google-cloud-sdk@${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}..."
-
-    curl -o google-cloud-sdk.tar.gz "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}.tar.gz"
-    tar -xvzf ./google-cloud-sdk.tar.gz
-    mv ./google-cloud-sdk /usr/local/share/google-cloud-sdk
-
-    echo "Installing google-cloud-sdk@${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}..."
+    # Ex. google-cloud-sdk-369.0.0-Linux-x86_64
+    file="google-cloud-sdk-${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}-$(uname)-$(uname -m)"
     
+    echo "Downloading and extracting ${file}..."
+    curl -o google-cloud-sdk.tar.gz "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${file}.tar.gz"
+
+    echo "Extracting ${file}..."
+    tar -xvzf ./google-cloud-sdk.tar.gz
+
+    echo "Installing ${file}..."
+    mv ./google-cloud-sdk /usr/local/share/google-cloud-sdk
     /usr/local/share/google-cloud-sdk/install.sh --quiet --path-update=true
 
-    echo "Installed google-cloud-sdk@${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}"
+    echo "Installed ${file}"
 fi
 
 
 if [ ! -z ${_BUILD_ARG_GOOGLE_CLOUD_SQL_AUTH_PROXY} ]; then
-    echo "Downloading cloud_sql_proxy package..."
+    # Ex. cloud_sql_proxy.Linux.amd64
+    file="cloud_sql_proxy.$(uname).$(dpkg --print-architecture)"
 
-    curl https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -o cloud_sql_proxy
+    echo "Downloading ${file}..."
+    curl -o cloud_sql_proxy "https://dl.google.com/cloudsql/${file}"
     chmod +x ./cloud_sql_proxy
+    mv ./cloud_sql_proxy /usr/local/bin/cloud_sql_proxy
     
-    echo "Downloaded cloud_sql_proxy package"
+    echo "Installed ${file}"
 fi

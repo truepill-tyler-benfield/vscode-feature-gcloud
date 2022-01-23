@@ -25,12 +25,8 @@ To include your feature in a project's devcontainer, provide the following `feat
 ```jsonc
 "image": "mcr.microsoft.com/vscode/devcontainers/base",
 features: {
-    "truepill-tyler-benfield/vscode-feature-gcloud/google-cloud-sdk": {
-        "version": "latest"
-    },
-    "truepill-tyler-benfield/vscode-feature-gcloud/google-cloud-sql-auth-proxy": {
-        "version": "latest"
-    }
+    "truepill-tyler-benfield/vscode-feature-gcloud/google-cloud-sdk": "369.0.0",
+    "truepill-tyler-benfield/vscode-feature-gcloud/google-cloud-sql-auth-proxy": "latest"
 }
 ```
 
@@ -38,8 +34,6 @@ Providing no version implies the latest release's artifacts. To supply a tag as 
 
 ```jsonc
 features: {
-    "truepill-tyler-benfield/vscode-feature-gcloud/google-cloud-sdk@v0.0.1": {
-        "version": "latest"
-    }
+    "truepill-tyler-benfield/vscode-feature-gcloud/google-cloud-sdk@v0.0.1": "369.0.0"
 }
 ```

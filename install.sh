@@ -20,7 +20,7 @@ if [ ! -z ${_BUILD_ARG_GOOGLE_CLOUD_SDK} ]; then
 
     echo "Installing google-cloud-sdk@${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}..."
     
-    /usr/local/share/google-cloud-sdk/install.sh --quiet
+    /usr/local/share/google-cloud-sdk/install.sh --quiet --path-update=true
 
     echo "Installed google-cloud-sdk@${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}"
 fi

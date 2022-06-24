@@ -12,8 +12,15 @@ set +a
 
 
 if [ ! -z ${_BUILD_ARG_GOOGLE_CLOUD_SDK} ]; then
+
+    machine="$(uname -m)"
+
+    if [ "$machine" == 'aarch64' ]; then
+      machine="arm"
+    fi
+
     # Ex. google-cloud-sdk-369.0.0-Linux-x86_64
-    file="google-cloud-sdk-${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}-$(uname)-$(uname -m)"
+    file="google-cloud-sdk-${_BUILD_ARG_GOOGLE_CLOUD_SDK_VERSION}-$(uname)-${machine}"
     
     echo "Downloading and extracting ${file}..."
     curl -o google-cloud-sdk.tar.gz "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${file}.tar.gz"

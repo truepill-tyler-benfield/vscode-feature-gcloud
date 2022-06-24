@@ -19,7 +19,7 @@ if [ ! -z ${_BUILD_ARG_GOOGLE_CLOUD_SDK} ]; then
     curl -o google-cloud-sdk.tar.gz "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${file}.tar.gz"
 
     echo "Extracting ${file}..."
-    tar -xvzf ./google-cloud-sdk.tar.gz
+    tar -xvf ./google-cloud-sdk.tar.gz
 
     echo "Installing ${file}..."
     mv ./google-cloud-sdk /usr/local/share/google-cloud-sdk
